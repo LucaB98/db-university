@@ -57,6 +57,7 @@ SELECT C.`name`, T.`name`, T.`surname`, T.`id` FROM `courses`AS C JOIN `course_t
 -- 4. Selezionare tutti gli studenti con i dati relativi al corso di laurea a cui sono iscritti e il relativo dipartimento, in ordine alfabetico per cognome e nome
 
 -- 5. Selezionare tutti i corsi di laurea con i relativi corsi e insegnanti
+SELECT D.`name`AS 'corso_laurea', C.`name`AS 'nome_corso', T.`name`AS 'nome_insegnante' FROM `degrees` AS D JOIN `courses`AS C ON D.`id`= C.`degree_id` JOIN `course_teacher` AS CT ON C.`id`= CT.`course_id` JOIN `teachers` AS T ON T.`id`= CT.`teacher_id`;
 
 -- 6. Selezionare tutti i docenti che insegnano nel Dipartimento di Matematica (54)
 
