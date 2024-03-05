@@ -46,10 +46,10 @@ SELECT COUNT(*) AS 'n_corsi', `department_id` AS 'dipartimento' FROM `degrees` G
 
 
 -- 1. Selezionare tutti gli studenti iscritti al Corso di Laurea in Economia
-SELECT s.`id`,S.`name`, S.`surname` FROM `students`AS S JOIN `degrees`AS D ON S.`degree_id`= D.`id` WHERE D.`name`= 'Corso di Laurea in Economia';
+SELECT S.`id`,S.`name`, S.`surname` FROM `students`AS S JOIN `degrees`AS D ON S.`degree_id`= D.`id` WHERE D.`name`= 'Corso di Laurea in Economia';
 
 -- 2. Selezionare tutti i Corsi di Laurea del Dipartimento di Neuroscienze
-SELECT C.`id`,C.`name` FROM `courses` AS C JOIN `degrees`AS D ON C.`degree_id`= D.`id` JOIN `departments` AS DP ON D.`department_id`= DP.`id` WHERE DP.`name`= 'Dipartimento di Neuroscienze';
+SELECT D.`name` FROM `degrees` AS D JOIN `departments` AS DP ON D.`department_id`= DP.`id` WHERE DP.`name`= 'Dipartimento di Neuroscienze';
 
 -- 3. Selezionare tutti i corsi in cui insegna Fulvio Amato (id=44)
 SELECT C.`name`, T.`name`, T.`surname`, T.`id` FROM `courses`AS C JOIN `course_teacher`AS CT ON C.`id`= CT.`course_id` JOIN `teachers`AS T ON T.`id`= CT.`teacher_id` WHERE T.`name`= 'Fulvio' AND T.`surname`= 'Amato';
@@ -63,3 +63,4 @@ SELECT D.`name`AS 'corso_laurea', C.`name`AS 'nome_corso', T.`name`AS 'nome_inse
 SELECT DISTINCT T.`name`AS 'nome_insegnante', T.`surname` AS 'cognome_insegnate', DP.`name` FROM `degrees` AS D JOIN `courses`AS C ON D.`id`= C.`degree_id` JOIN `course_teacher` AS CT ON C.`id`= CT.`course_id` JOIN `teachers` AS T ON T.`id`= CT.`teacher_id` JOIN `departments` AS DP ON DP.`id` = D.`department_id` WHERE DP.`name`= 'Dipartimento di Matematica';
 
 -- 7. BONUS: Selezionare per ogni studente quanti tentativi d’esame ha sostenuto per superare ciascuno dei suoi esami
+SELECT S.`name` AS 'nome_studente', S.`surname` AS 'cognome_studente', C.`name` AS 'nome_corso' FROM `students`AS S JOIN `exam_student`AS ES ON S.`id`= ES.`Student_id` JOIN `exams` AS E ON E.`id`= ES.`exam_id` JOIN `courses`AS C ON C.`id` = E.`course_id`;
